@@ -48,7 +48,7 @@ func getValue(rank string) int {
 	return val
 }
 
-// Card is the primative unit of play that makes up a hand in poker
+// Card is the primitive unit of play that makes up a hand in poker
 type Card struct {
 	rankValue int
 	rank      string
