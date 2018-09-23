@@ -1,4 +1,6 @@
 # Go Poker
+[![Go Report Card](https://goreportcard.com/badge/github.com/syllabix/go-poker)](https://goreportcard.com/report/github.com/syllabix/go-poker)
+
 A project for analyzing and projecting poker hands
 
 ## Overview
