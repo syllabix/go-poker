@@ -157,5 +157,5 @@ func createCard(cardCode string) Card {
 	if err != nil {
 		panic(err)
 	}
-	return *card
+	return card
 }

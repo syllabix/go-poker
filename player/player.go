@@ -20,7 +20,7 @@ func assembleHand(codes []string) (poker.Hand, error) {
 		if err != nil {
 			return hand, err
 		}
-		hand[i] = *card
+		hand[i] = card
 	}
 	return hand, nil
 }

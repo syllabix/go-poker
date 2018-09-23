@@ -2,6 +2,7 @@ package poker
 
 import (
 	"errors"
+	"fmt"
 	"regexp"
 	"strconv"
 )
@@ -17,6 +18,16 @@ var (
 	rankRegEx = regexp.MustCompile("[2-9TJQKA]")
 	suitRegEx = regexp.MustCompile("[SDCH]")
 )
+
+// InvalidCard is simply that - a invalid playing card. It is intended
+// to be used in the event a proper card cannot be created, or another
+// erroneous scenario occurs
+var InvalidCard = Card{
+	rankValue: 9999,
+	rank:      "Uknown",
+	suit:      "Uknown",
+	code:      "N/A",
+}
 
 func getValue(rank string) int {
 	val, err := strconv.Atoi(rank)
@@ -46,28 +57,28 @@ type Card struct {
 }
 
 func (c Card) String() string {
-	return c.code
+	return fmt.Sprintf("Card: %s, Value: %d", c.code, c.rankValue)
 }
 
 // NewCard intializes a new Poker Card from a poker character cardcode.
 // If initialization is not successful, the returned error value
 // will report what went wrong
-func NewCard(cardCode string) (*Card, error) {
+func NewCard(cardCode string) (Card, error) {
 	if len(cardCode) != 2 {
-		return nil, ErrCharCodeInvalidLength
+		return InvalidCard, ErrCharCodeInvalidLength
 	}
 
 	rank := cardCode[:1]
 	if !rankRegEx.MatchString(rank) {
-		return nil, ErrInvalidCardRank
+		return InvalidCard, ErrInvalidCardRank
 	}
 
 	suit := cardCode[1:]
 	if !suitRegEx.MatchString(suit) {
-		return nil, ErrInvalidSuit
+		return InvalidCard, ErrInvalidSuit
 	}
 
-	return &Card{
+	return Card{
 		rankValue: getValue(rank),
 		rank:      rank,
 		suit:      suit,
