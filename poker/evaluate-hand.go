@@ -3,8 +3,6 @@ package poker
 import (
 	"bytes"
 	"sort"
-	"strconv"
-	"strings"
 )
 
 type rankcountmap map[string]int
@@ -78,16 +76,6 @@ func category(rankCounts map[string]int, hand Hand, hasFlush bool) RankCategory 
 	}
 
 	return HighCard
-}
-
-func catKey(counts []int) string {
-	sort.Sort(sort.Reverse(sort.IntSlice(counts)))
-
-	keySlice := make([]string, len(counts))
-	for i, count := range counts {
-		keySlice[i] = strconv.Itoa(count)
-	}
-	return strings.Join(keySlice, "")
 }
 
 func hasStraight(hand Hand) bool {
