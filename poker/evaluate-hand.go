@@ -41,16 +41,9 @@ func GetRank(hand Hand) RankCategory {
 	return category(rankCounts, hand, hasFlush)
 }
 
-func category(rankCounts map[string]int, hand Hand, hasFlush bool) RankCategory {
-	i := 0
-	counts := make([]byte, len(rankCounts))
-	for _, count := range rankCounts {
-		counts[i] = byte(count)
-		i++
-	}
-	sort.Slice(counts, func(i, j int) bool {
-		return int(counts[i]) > int(counts[j])
-	})
+func category(rankCounts rankcountmap, hand Hand, hasFlush bool) RankCategory {
+
+	counts := extractCounts(rankCounts)
 
 	if bytes.Equal(counts, quads) {
 		return FourOfAKind
@@ -76,6 +69,21 @@ func category(rankCounts map[string]int, hand Hand, hasFlush bool) RankCategory 
 	}
 
 	return HighCard
+}
+
+func extractCounts(rankCounts rankcountmap) []byte {
+	i := 0
+	counts := make([]byte, len(rankCounts))
+	for _, count := range rankCounts {
+		counts[i] = byte(count)
+		i++
+	}
+
+	sort.Slice(counts, func(i, j int) bool {
+		return counts[i] > counts[j]
+	})
+
+	return counts
 }
 
 func hasStraight(hand Hand) bool {
