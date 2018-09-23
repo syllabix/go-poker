@@ -1,3 +1,2 @@
 # Go Poker
-
-The project serves as 
+A project for analyzing and projecting poker hands
