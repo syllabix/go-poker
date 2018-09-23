@@ -1,6 +1,7 @@
 package poker
 
 import (
+	"bytes"
 	"sort"
 	"strconv"
 	"strings"
@@ -10,6 +11,14 @@ type rankcountmap map[string]int
 
 const (
 	numranks = 13
+)
+
+var (
+	quads   = []byte{byte(4), byte(1)}
+	boat    = []byte{byte(3), byte(2)}
+	set     = []byte{byte(3), byte(1), byte(1)}
+	twopair = []byte{byte(2), byte(2), byte(1)}
+	onepair = []byte{byte(2), byte(1), byte(1), byte(1)}
 )
 
 // GetRank takes a poker hand and returns its HandRank
@@ -36,26 +45,25 @@ func GetRank(hand Hand) RankCategory {
 
 func category(rankCounts map[string]int, hand Hand, hasFlush bool) RankCategory {
 	i := 0
-	counts := make([]int, len(rankCounts))
+	counts := make([]byte, len(rankCounts))
 	for _, count := range rankCounts {
-		counts[i] = count
+		counts[i] = byte(count)
 		i++
 	}
-	key := catKey(counts)
+	sort.Slice(counts, func(i, j int) bool {
+		return int(counts[i]) > int(counts[j])
+	})
 
-	switch key {
-	case "41":
+	if bytes.Equal(counts, quads) {
 		return FourOfAKind
-	case "32":
+	} else if bytes.Equal(counts, boat) {
 		return FullHouse
-	case "311":
+	} else if bytes.Equal(counts, set) {
 		return ThreeOfAKind
-	case "221":
+	} else if bytes.Equal(counts, twopair) {
 		return TwoPair
-	case "2111":
+	} else if bytes.Equal(counts, onepair) {
 		return OnePair
-	default:
-		break
 	}
 
 	if hasStraight(hand) {
