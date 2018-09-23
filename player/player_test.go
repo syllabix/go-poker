@@ -97,6 +97,18 @@ func TestRevealBestHand(t *testing.T) {
 			want:    "Hand: 3D 5S 2H QD TD Deck: 6S KH 9H AD QH Best hand: highest-card",
 			wantErr: false,
 		},
+		{
+			name:    "Invalid Input Length",
+			args:    args{"2H AD 5H 6H 9H 4H 3C"},
+			want:    "",
+			wantErr: true,
+		},
+		{
+			name:    "Invalid Card Formats",
+			args:    args{"2H A 5H 6H 9H 4H3 3C"},
+			want:    "",
+			wantErr: true,
+		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
