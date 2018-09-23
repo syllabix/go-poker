@@ -23,7 +23,7 @@ D = Diamonds
 H = Hearts
 
 Example Hand:
-2H 2S 3H 3S 3C
+`2H 2S 3H 3S 3C`
 
 ### Running the project
 The following instructions assume Go is installed and a Go workspace is set up.
@@ -32,10 +32,12 @@ The following instructions assume Go is installed and a Go workspace is set up.
 2. Navigate to the root of the project and run `go run main.go`
 3. Follow the interactive terminal prompts
 
+```sh
 Example Input:
 2H 2S 3H 3S 3C 2D 9C 3D 6C TH
 ^------------^ ^------------^
      Hand           Deck
+```
 
 
 #### Benchmarks
