@@ -18,7 +18,7 @@ const (
 	TwoPair
 	OnePair
 	HighCard
-	// To be used to represent a non value representation
+	// To be used to represent a non value
 	EmptyHand
 )
 

@@ -23,37 +23,34 @@ var (
 func GetRank(hand Hand) RankCategory {
 	hasFlush := true
 	flushSuit := hand[0].suit
-	rankCounts := make(rankcountmap, numranks)
+	rankCounts := makeRankCounter()
 
 	for _, card := range hand {
 		if hasFlush {
 			hasFlush = flushSuit == card.suit
 		}
 
-		count, hasRank := rankCounts[card.rank]
-		if hasRank {
-			rankCounts[card.rank] = count + 1
-		} else {
-			rankCounts[card.rank] = 1
-		}
+		rankCounts[card.rankValue-2]++
 	}
 
 	return category(rankCounts, hand, hasFlush)
 }
 
-func category(rankCounts rankcountmap, hand Hand, hasFlush bool) RankCategory {
+func category(counts []byte, hand Hand, hasFlush bool) RankCategory {
 
-	counts := extractCounts(rankCounts)
+	sort.Slice(counts, func(i, j int) bool {
+		return counts[i] > counts[j]
+	})
 
-	if bytes.Equal(counts, quads) {
+	if bytes.HasPrefix(counts, quads) {
 		return FourOfAKind
-	} else if bytes.Equal(counts, boat) {
+	} else if bytes.HasPrefix(counts, boat) {
 		return FullHouse
-	} else if bytes.Equal(counts, set) {
+	} else if bytes.HasPrefix(counts, set) {
 		return ThreeOfAKind
-	} else if bytes.Equal(counts, twopair) {
+	} else if bytes.HasPrefix(counts, twopair) {
 		return TwoPair
-	} else if bytes.Equal(counts, onepair) {
+	} else if bytes.HasPrefix(counts, onepair) {
 		return OnePair
 	}
 
@@ -89,4 +86,12 @@ func extractCounts(rankCounts rankcountmap) []byte {
 func hasStraight(hand Hand) bool {
 	sort.Sort(ByRank(hand[:]))
 	return (hand[4].rankValue - hand[0].rankValue) == 4
+}
+
+func makeRankCounter() []byte {
+	counter := make([]byte, 13, 13)
+	for idx := range counter {
+		counter[idx] = 0
+	}
+	return counter
 }

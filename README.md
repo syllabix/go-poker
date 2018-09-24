@@ -47,15 +47,15 @@ Example Input:
 goos: darwin
 goarch: amd64
 pkg: github.com/syllabix/psychic-poker-player/poker
-BenchmarkGetRank/Straight_Flush-8         	 1000000	      1023 ns/op	     805 B/op	       6 allocs/op
-BenchmarkGetRank/Four_of_a_Kind-8         	 2000000	       700 ns/op	     482 B/op	       4 allocs/op
-BenchmarkGetRank/Full_House-8             	 2000000	       669 ns/op	     482 B/op	       4 allocs/op
-BenchmarkGetRank/Flush-8                  	 1000000	      1098 ns/op	     805 B/op	       6 allocs/op
-BenchmarkGetRank/Straight-8               	 1000000	      1056 ns/op	     805 B/op	       6 allocs/op
-BenchmarkGetRank/Three_of_a_Kind-8        	 2000000	       722 ns/op	     483 B/op	       4 allocs/op
-BenchmarkGetRank/Two_Pair-8               	 2000000	       726 ns/op	     483 B/op	       4 allocs/op
-BenchmarkGetRank/One_Pair-8               	 2000000	       777 ns/op	     484 B/op	       4 allocs/op
-BenchmarkGetRank/High_Card-8              	 1000000	      1020 ns/op	     805 B/op	       6 allocs/op
+BenchmarkGetRank/Straight_Flush-8      2000000   588 ns/op   5 allocs/op
+BenchmarkGetRank/Four_of_a_Kind-8      5000000   340 ns/op   3 allocs/op
+BenchmarkGetRank/Full_House-8          5000000   367 ns/op   3 allocs/op
+BenchmarkGetRank/Flush-8               2000000   775 ns/op   5 allocs/op
+BenchmarkGetRank/Straight-8            2000000   661 ns/op   5 allocs/op
+BenchmarkGetRank/Three_of_a_Kind-8     5000000   361 ns/op   3 allocs/op
+BenchmarkGetRank/Two_Pair-8            5000000   366 ns/op   3 allocs/op
+BenchmarkGetRank/One_Pair-8            5000000   387 ns/op   3 allocs/op
+BenchmarkGetRank/High_Card-8           2000000   620 ns/op   5 allocs/op
 ```
 
 #### Todos
