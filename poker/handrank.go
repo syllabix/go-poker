@@ -1,7 +1,7 @@
 package poker
 
 // RankCategory is the type used to define hand ranking categories
-type RankCategory int32
+type RankCategory int16
 
 func (p RankCategory) String() string {
 	return rankmap[p]

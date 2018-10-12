@@ -2,10 +2,9 @@ package poker
 
 import (
 	"bytes"
+	"math"
 	"sort"
 )
-
-type rankcountmap map[string]int
 
 const (
 	numranks = 13
@@ -68,24 +67,28 @@ func category(counts []byte, hand Hand, hasFlush bool) RankCategory {
 	return HighCard
 }
 
-func extractCounts(rankCounts rankcountmap) []byte {
-	i := 0
-	counts := make([]byte, len(rankCounts))
-	for _, count := range rankCounts {
-		counts[i] = byte(count)
-		i++
+func min(x, y int) int {
+	if x < y {
+		return x
 	}
+	return y
+}
 
-	sort.Slice(counts, func(i, j int) bool {
-		return counts[i] > counts[j]
-	})
-
-	return counts
+func max(x, y int) int {
+	if x > y {
+		return x
+	}
+	return y
 }
 
 func hasStraight(hand Hand) bool {
-	sort.Sort(ByRank(hand[:]))
-	return (hand[4].rankValue - hand[0].rankValue) == 4
+	maxValue := math.MinInt16
+	minValue := math.MaxInt16
+	for _, card := range hand {
+		maxValue = max(card.rankValue, maxValue)
+		minValue = min(card.rankValue, minValue)
+	}
+	return (maxValue - minValue) == 4
 }
 
 func makeRankCounter() []byte {

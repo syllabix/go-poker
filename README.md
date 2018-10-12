@@ -47,17 +47,14 @@ Example Input:
 goos: darwin
 goarch: amd64
 pkg: github.com/syllabix/psychic-poker-player/poker
-BenchmarkGetRank/Straight_Flush-8      2000000   588 ns/op   5 allocs/op
-BenchmarkGetRank/Four_of_a_Kind-8      5000000   340 ns/op   3 allocs/op
-BenchmarkGetRank/Full_House-8          5000000   367 ns/op   3 allocs/op
-BenchmarkGetRank/Flush-8               2000000   775 ns/op   5 allocs/op
-BenchmarkGetRank/Straight-8            2000000   661 ns/op   5 allocs/op
-BenchmarkGetRank/Three_of_a_Kind-8     5000000   361 ns/op   3 allocs/op
-BenchmarkGetRank/Two_Pair-8            5000000   366 ns/op   3 allocs/op
-BenchmarkGetRank/One_Pair-8            5000000   387 ns/op   3 allocs/op
-BenchmarkGetRank/High_Card-8           2000000   620 ns/op   5 allocs/op
-```
+BenchmarkGetRank/Straight_Flush-8   392 ns/op    3 allocs/op
+BenchmarkGetRank/Four_of_a_Kind-8   314 ns/op    3 allocs/op
+BenchmarkGetRank/Full_House-8       324 ns/op    3 allocs/op
+BenchmarkGetRank/Flush-8            420 ns/op    3 allocs/op
+BenchmarkGetRank/Straight-8         401 ns/op    3 allocs/op
+BenchmarkGetRank/Three_of_a_Kind-8  335 ns/op    3 allocs/op
+BenchmarkGetRank/Two_Pair-8         343 ns/op    3 allocs/op
+BenchmarkGetRank/One_Pair-8         356 ns/op    3 allocs/op
+BenchmarkGetRank/High_Card-8        404 ns/op    3 allocs/op
 
-#### Todos
-1. Improve performance
-2. Improve code coverage
+```

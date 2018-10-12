@@ -57,7 +57,8 @@ type Card struct {
 }
 
 func (c Card) String() string {
-	return fmt.Sprintf("Card: %s, Value: %d", c.code, c.rankValue)
+	// return fmt.Sprintf("Card: %s, Value: %d", c.code, c.rankValue)
+	return fmt.Sprintf("%d", c.rankValue)
 }
 
 // NewCard intializes a new Poker Card from a poker character cardcode.
@@ -88,10 +89,3 @@ func NewCard(cardCode string) (Card, error) {
 
 // Hand is 5 poker cards
 type Hand [5]Card
-
-// ByRank implements sort.Interface for for a slice of Cards
-type ByRank []Card
-
-func (a ByRank) Len() int           { return len(a) }
-func (a ByRank) Swap(i, j int)      { a[i], a[j] = a[j], a[i] }
-func (a ByRank) Less(i, j int) bool { return a[i].rankValue < a[j].rankValue }
